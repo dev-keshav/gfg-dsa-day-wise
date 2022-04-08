@@ -1,93 +1,86 @@
-// link: https://practice.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1/
-
 // { Driver Code Starts
-#include <bits/stdc++.h> 
-using namespace std; 
+#include <iostream>
+#include<cstdio>
+#include<cstdlib>
+
+using namespace std;
 
 struct Node
 {
     int data;
-    struct Node* next;
-    
-    Node(int x){
-        data = x;
-        next = NULL;
-    }
-};
-void printList(Node* node) 
-{ 
-    while (node != NULL) { 
-        cout << node->data <<" "; 
-        node = node->next; 
-  }  
-  cout<<"\n";
-} 
+    struct Node *next;
+}*start;
 
-
+void insert();
 
  // } Driver Code Ends
-/*Structure of the linked list node is as
-struct Node {
-  int data;
-  struct Node * next;
-  Node(int x) {
-    data = x;
-    next = NULL;
+/*
+  Print elements of a linked list on console 
+  head pointer input could be NULL as well for empty list
+  Node is defined as 
+  struct Node
+  {
+     int data;
+     Node *next;
   }
-}; */
+*/
 
-class Solution{
-  public:
-    //Function to insert a node at the beginning of the linked list.
-    Node *insertAtBegining(Node *head, int x) {
-       // Your code here
-       Node* temp = new Node(x);
-       temp->next = head;
-       return temp;
-    }
-    
-    
-    //Function to insert a node at the end of the linked list.
-    Node *insertAtEnd(Node *head, int x)  {
-       // Your code here
-       Node* temp = new Node(x);
-       if(head==NULL){
-           return temp;
-       }
-       Node* curr = head;
-       while(curr->next!=NULL){
-           curr = curr->next;
-       }
-       curr->next = temp;
-       return head;
+class Solution
+{
+    public:
+    void display(Node *head)
+    {
+      //your code goes here
+      while(head!=NULL){
+          cout<<head->data<<" ";
+          head=head->next;
+      }
     }
 };
 
-
 // { Driver Code Starts.
-int main() 
-{ 
+
+int main()
+{
     int t;
     cin>>t;
     while(t--)
     {
-        int n;
-        cin>>n;
-        struct Node *head = NULL;
-        for (int i = 0; i < n; ++i)
-        {
-            int data, indicator;
-            cin>>data;
-            cin>>indicator;
-            Solution obj;
-            if(indicator)
-                head = obj.insertAtEnd(head, data); 
-            else
-                head = obj.insertAtBegining(head, data);
-        }
-        printList(head); 
+      start=NULL;
+      insert();
+      Solution ob;
+      ob.display(start);
+      cout<<endl;
     }
-    return 0; 
-} 
+    return 0;
+
+}
+
+
+ void insert()
+ {
+     int n,value;
+     cin>>n;
+     struct Node *temp;
+     for(int i=0;i<n;i++)
+     {
+         cin>>value;
+         if(i==0)
+         {
+              start=(struct Node *) malloc( sizeof(struct Node) );
+              start->data=value;
+              start->next=NULL;
+              temp=start;
+              continue;
+         }
+         else
+         {
+             temp->next= (struct Node *) malloc( sizeof(struct Node) );
+             temp=temp->next;
+             temp->data=value;
+             temp->next=NULL;
+         }
+     }
+ }
 
   // } Driver Code Ends
