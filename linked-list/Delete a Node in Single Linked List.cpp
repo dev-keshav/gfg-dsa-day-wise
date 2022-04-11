@@ -89,6 +89,9 @@ Node* deleteNode(Node *head,int x)
     if(head==NULL){
         return head;
     }
+    if(x==1){
+        return head->next;
+    }
     Node* temp = head;
     int count=1;
     while(count<x-1){
@@ -96,5 +99,5 @@ Node* deleteNode(Node *head,int x)
         count++;
     }
     temp->next = temp->next->next;
-    return temp;
+    return head;
 }
